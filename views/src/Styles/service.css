@@ -49,6 +49,9 @@
 #service #footer_top p{
 	padding: 5px 10px;
 }
+#service #footer_top a{
+  color: #cfcfcf;
+}
 #service #footer_bottom{
 	background: #083970
 }
