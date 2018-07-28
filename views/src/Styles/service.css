@@ -40,6 +40,35 @@
     background-color: #fff;
     transition: background-color 400ms ease,box-shadow 200ms ease;
 }
+#service #message_header{
+  position: relative;
+}
+#service #message_header #wp_message{
+  position: absolute;
+  right: 0px;
+  padding: 5px 10px;
+  width: 250px;
+  max-height: 500px;
+  overflow: auto;
+}
+#wp_message .box_message{
+  position: relative;
+  background: #fff;
+  width: 100%;
+  padding: 15px 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+#wp_message .close{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 /* HEADER CLOSE */
 
 /* FOOTER */

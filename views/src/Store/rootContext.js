@@ -2,7 +2,7 @@ import React,{Component} from "react"
 import axios from "axios"
 const RootContext = React.createContext();
 
-
+var timer = null;
 export class Provider extends Component{
     constructor(props){
         super(props)
@@ -17,7 +17,8 @@ export class Provider extends Component{
     }
     state = {
         user: {},
-        isLogined: false
+        isLogined: false,
+        messageHeader: []
     }
     isAuthenticated = (fb)=>{
         this.getDataServer().then(data=>{
@@ -36,12 +37,38 @@ export class Provider extends Component{
             .catch(e=>reject(e.toString()))
         }) 
     }
+    setMessageHeader = (data)=>{
+        this.setState({
+            messageHeader: [...this.state.messageHeader,data]
+        })
+    }
+    componentDidUpdate(){
+        if(this.state.messageHeader.length > 0){
+            clearInterval(timer)
+            timer = setInterval(()=>{
+                console.log("timer")
+                if(this.state.messageHeader.length>0){
+                    let tmp = [...this.state.messageHeader]
+                    tmp.shift();
+                    this.setState({
+                        messageHeader: tmp
+                    })
+                }
+            },1500)
+        }else{
+            clearInterval(timer)
+        }
+        if(this.state.messageHeader.length == 0){
+            
+        }
+    }
     render(){
         return (
             <RootContext.Provider value={{
                 state: this.state,
                 action: {
-                    isAuthenticated : this.isAuthenticated
+                    isAuthenticated : this.isAuthenticated,
+                    setMessageHeader: this.setMessageHeader
                 }
             }}>
                 {this.props.children}

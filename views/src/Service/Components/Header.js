@@ -1,5 +1,7 @@
 import React,{ Component } from 'react'
+import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
+import MessageHeader from "./MessageHeader"
 import { Consumer } from '../../Store/rootContext'
 import $ from "jquery"
 
@@ -36,6 +38,13 @@ class Header extends Component{
 			}
 		});
 	}
+	showMessage = (array)=>{
+		return array.map((item,index)=>{
+			return(
+				<MessageHeader >{item.title}</MessageHeader>
+			);
+		})
+	}
 	render(){
 		return(
 			<div id="header">
@@ -56,6 +65,16 @@ class Header extends Component{
 						}}
 					
 					</Consumer>
+					</div>
+					<div id="message_header">
+						<div id="wp_message">
+							<Consumer>
+								{(value)=>{
+									const state = value.state
+									return this.showMessage(state.messageHeader)
+								}}
+							</Consumer>
+						</div>
 					</div>
 				</div>
 				{/* <div class="header-buffer">
